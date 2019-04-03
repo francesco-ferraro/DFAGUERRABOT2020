@@ -139,9 +139,8 @@ def distanza_geodetica(territorio1, territorio2):
 def trova_vicino(territorio):
     '''
     Trova il territorio piu vicino a quello dato che non sia già controllato
-    dalla provincia che lo controllat
-    Esempio:
-        trova_vicino("Torino") -> "Aosta"
+    dalla provincia che lo controlla
+
         trova_vicino("Torino") -> "Aosta"
     '''
     territori_esclusi = territori_controllati(provincia_occupante(territorio))
@@ -161,9 +160,9 @@ def trova_vicino(territorio):
 def territori_controllati(provincia):
     '''
     Restituisce la lista, anche vuota, dei territori controllati dalla provincia
-    Esempio:
+
         territori_controllati('Torino') -> ['Aosta', 'Torino']
-        territori_controllati('Aosta)   -> []
+        territori_controllati('Aosta')   -> []
     '''
     
     territori_controllati = []
@@ -175,6 +174,12 @@ def territori_controllati(provincia):
     return territori_controllati
 
 def provincia_occupante(territorio):
+    '''
+    Restituisce la provincia che occupa un territorio
+    
+        provincia_occupante('Aosta') -> 'Torino'
+    '''
+    
     return territori[territorio][0]
     
 def aggiorna_occupante(territorio, provincia):
