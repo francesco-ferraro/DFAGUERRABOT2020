@@ -172,21 +172,31 @@ def owner(location):
             return i
 
 players = []
+# results = [0] * len(LOCATIONS)
+results = [23, 0, 1, 46, 5, 5, 3, 3, 0, 6, 16, 8, 2, 0, 19, 8, 10, 14, 1, 2, 7, 5, 17, 9, 3, 5, 3, 0, 2, 2, 29, 0, 1, 1, 12, 1, 20, 1, 3, 35, 17, 3, 22, 2, 25, 22, 3, 9, 14, 15, 24, 1, 33, 3, 3, 19, 2, 3, 13, 15, 5, 1, 2, 3, 4, 21, 7, 29, 10, 10, 7, 30, 2, 22, 5, 23, 8, 3, 8, 3, 5, 1, 5, 1, 23, 6, 39, 5, 15, 3, 1, 6, 0, 1, 1, 4, 0, 33, 20, 15, 2, 4, 6, 5, 4, 2, 1, 11, 2, 0]
 
-# Game inizialization: every player owns itself
-for i in range(len(LOCATIONS)):
-    players.append([i])
-
-while True:
-    random_location = random.choice(range(len(LOCATIONS))) # TODO Improvable
-    target_location = nearest(random_location)
-
-    if target_location is not None:    
-        winner = owner(random_location)
-        loser = owner(target_location)
+for i in range(1000):
+    # Game inizialization
+    players = []
+    for i in range(len(LOCATIONS)):
+        # Every player owns itself
+        players.append([i])
         
-        players[loser].remove(target_location)
-        players[winner].append(target_location)
-    else:
-        print(LOCATIONS[owner(0)][0])
-        break
+    while True:
+        random_location = random.choice(range(len(LOCATIONS))) # TODO Improvable
+        target_location = nearest(random_location)
+
+        if target_location is not None:    
+            winner = owner(random_location)
+            loser = owner(target_location)
+        
+            players[loser].remove(target_location)
+            players[winner].append(target_location)
+        else:
+            results[owner(0)] += 1
+            break
+            
+print(results)
+
+for i in range(len(LOCATIONS)):
+    print(LOCATIONS[i][0] + " " + str(results[i]))
