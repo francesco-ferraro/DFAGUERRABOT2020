@@ -2,12 +2,11 @@
 
 from math import sin, cos, sqrt, atan2, radians
 import random
-import copy
 
 # Raggio terrestre
 R = 6373.0
 
-locations = [
+Locations = [
     # Nome                  Longitudine         Latitudine
     ["Cuneo",               7.5738751700989440, 44.478425321838050], 
     ["Bologna",             11.343112711393536, 44.430901941929270], 
@@ -153,9 +152,9 @@ def nearest(location):
     nearest = None
     min_distance = float("inf")  
     
-    for i in range(len(locations)):
+    for i in range(len(Locations)):
         if i in excluded_players: continue
-        distance = geodetic_distance(locations[current_owner], locations[i])
+        distance = geodetic_distance(Locations[current_owner], Locations[i])
         if distance < min_distance:
             min_distance = distance
             nearest = i
@@ -175,11 +174,11 @@ def owner(location):
 players = []
 
 # Game inizialization: every player owns itself
-for i in range(len(locations)):
+for i in range(len(Locations)):
     players.append([i])
 
 while True:
-    random_location = random.choice(range(len(locations))) # TODO Improvable
+    random_location = random.choice(range(len(Locations))) # TODO Improvable
     target_location = nearest(random_location)
 
     if target_location is not None:    
@@ -189,5 +188,5 @@ while True:
         players[loser].remove(target_location)
         players[winner].append(target_location)
     else:
-        print(locations[owner(0)][0])
+        print(Locations[owner(0)][0])
         break
