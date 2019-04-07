@@ -4,13 +4,15 @@
 # In[472]:
 
 
+
+import pygame
 import pygame as pg
 import numpy as np
 import random
 
 #Colors
 white = (255,255,255)
-black = (0,0,0)
+black = (0,0,0),
 
 L = 40
 
@@ -73,7 +75,12 @@ for floor in range (0,3):
 
 #image.fill(color, rect)
 
-pygame.display.update()
+pygame.display.flip()
+running = True
+while running:
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      running = False
 
 
 # In[353]:
