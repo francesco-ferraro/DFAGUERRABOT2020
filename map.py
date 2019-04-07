@@ -1,14 +1,9 @@
-
 # coding: utf-8
 
-# In[472]:
-
-
-
-import pygame
 import pygame as pg
 import numpy as np
 import random
+
 
 #Colors
 white = (255,255,255)
@@ -16,7 +11,7 @@ black = (0,0,0),
 
 L = 40
 
-#Open the screen
+# Open the screen
 screen = pg.display.set_mode((400,650))
 screen.fill(white)
 
@@ -36,8 +31,8 @@ for floor in range (0,3):
                 color2 = random.randint(0,255)
                 color3 = random.randint(0,255)
 
-                rect_im = pg.draw.rect(screen, pygame.Color(color1, color2, color3), (i*1.25*L + 2*L + k*2.875*L, j*L + L + floor*7*L, L, L), 0)
-                rect = pygame.Rect(i*1.25*L + 2*L + k*2.875*L, j*L + L + floor*7*L, L, L)
+                rect_im = pg.draw.rect(screen, pg.Color(color1, color2, color3), (i*1.25*L + 2*L + k*2.875*L, j*L + L + floor*7*L, L, L), 0)
+                rect = pg.Rect(i*1.25*L + 2*L + k*2.875*L, j*L + L + floor*7*L, L, L)
                 center = rect.center
                 temp = np.array([id, int(floor) , center, np.array([color1, color2, color3])])
                 np.array(officeid.append(temp))
@@ -51,8 +46,8 @@ for floor in range (0,3):
         color3 = random.randint(0,255)
 
         
-        pg.draw.rect(screen, pygame.Color(color1, color2, color3), (i*L + 2*L, 0.7*L + 7*floor*L, L, L), 0)
-        rect = pygame.Rect(i*L + 2*L, 0.7*L + 7*floor*L, L, L)
+        pg.draw.rect(screen, pg.Color(color1, color2, color3), (i*L + 2*L, 0.7*L + 7*floor*L, L, L), 0)
+        rect = pg.Rect(i*L + 2*L, 0.7*L + 7*floor*L, L, L)
         center = rect.center
         temp = np.array([id, int(floor) , center, np.array([color1, color2, color3])])
         np.array(officeid.append(temp))
@@ -75,16 +70,9 @@ for floor in range (0,3):
 
 #image.fill(color, rect)
 
-pygame.display.flip()
+pg.display.flip()
 running = True
 while running:
-  for event in pygame.event.get():
-    if event.type == pygame.QUIT:
+  for event in pg.event.get():
+    if event.type == pg.QUIT:
       running = False
-
-
-# In[353]:
-
-
-print(np.array(officeid)[20])
-

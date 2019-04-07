@@ -3,7 +3,6 @@
 # Sperimentazioni 1         sada, mazzocco, mengoni
 # Chimica                   vittadini
 # geometria                 balda(ssarri), garuti, urbinati??
-#                           quel tutor russo???
 # fisica 1                  carnera, lacaprara
 # analisi 2                 monti
 
@@ -35,3 +34,21 @@
 ## EVENTUALI
 # BETTINI
 # PERUZZI
+# BAIESI
+# BALDOVIN
+# LECHNER
+# RAFFAELLA CESARO, MONICA PIRONI
+# DALL'AGATA
+### DIRETTORE INFN 
+# BIBLIOTECARIE
+# Michele michelotto
+# Enrico gazzola (tipo strano pint of science)
+# Maritan
+# Matone
+# Orlandini
+# Pacciani
+# Rigolin
+# STANCO
+# ROBERTO (tecnico rostagni)
+
+# ALTRI DIP????
