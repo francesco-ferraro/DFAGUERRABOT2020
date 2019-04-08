@@ -171,13 +171,37 @@ def owner(location):
         if location in players[i]:
             return i
 
-players = []
-
 # Game inizialization
 players = []
+
+# Vanilla start
 for i in range(len(LOCATIONS)):
     # Every player owns itself
     players.append([i])
+
+# # Given start
+# for i in range(len(LOCATIONS)):
+#     # Every player owns itself
+#     players.append([])
+#
+# # VBO
+# players[45] = [0,3,4,9,10,12,21,22,28,29,34,35,37,40,45]
+# # Rovigo
+# players[15] = [1,6,8,13,15,25,26,31,32,33,41,43,46,51,53]
+# # Lucca
+# players[27] = [27]
+# # Taranto
+# players[47] = [4,11,23,24,47,48]
+# # Gorizia
+# players[52] = [17,39,44,49,50,52]
+# # Ragusa
+# players[71] = [14,16,30,36,42]
+# # Carbonia-Iglesias
+# players[87] = [2,7,18,19,20,38]
+# # Isernia
+# players[103] = [103]
+    
+
     
 while True:
     random_location = random.choice(range(len(LOCATIONS))) #TODO Migliorabile
