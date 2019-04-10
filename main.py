@@ -1,4 +1,4 @@
-import map as map
+import map
 
 '''
 inizializza la mappa: genera i colori degli uffici a random

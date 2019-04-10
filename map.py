@@ -4,7 +4,7 @@ def initialplot():
 
     import pygame as pg
     import numpy as np
-    import pandas as pd
+    # import pandas as pd
     import random
 
     #Colors
@@ -272,7 +272,7 @@ def replot(colorv):
 
     import pygame as pg
     import numpy as np
-    import pandas as pd
+    # import pandas as pd
     import random
 
     #Colors
