@@ -260,7 +260,7 @@ def initialplot():
       for event in pg.event.get():
         if event.type == pg.QUIT:
           running = False
-          return(colorv);
+          return(colorv, officeid);
 
 def updatecolor(idsconfitto, idvincitore, colorv):
         colorv[idsconfitto][0] = int(colorv[idvincitore][0])
@@ -525,4 +525,4 @@ def replot(colorv):
       for event in pg.event.get():
         if event.type == pg.QUIT:
           running = False
-          return(colorv);
+          return(colorv, officeid);
