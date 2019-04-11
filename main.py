@@ -98,7 +98,6 @@ for i in range(len(LOCATIONS)):
     players.append([i])
     
 (color, vettoreperfra) = map.initialplot()   
-print("Prova") 
 
 while True:
     random_location = randbelow(len(LOCATIONS))
