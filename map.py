@@ -263,12 +263,11 @@ def initialplot():
           return(colorv, officeid);
 
 def updatecolor(idsconfitto, idvincitore, colorv):
-        colorv[idsconfitto][0] = int(colorv[idvincitore][0])
-        colorv[idsconfitto][1] = int(colorv[idvincitore][1])
-        colorv[idsconfitto][2] = int(colorv[idvincitore][2])
-        return(colorv);
+        colorv1 = list(colorv)
+        colorv1[idsconfitto] = colorv1[idvincitore].copy()
+        return(colorv1);
 
-def replot(colorv):
+def replot(colorv, colorv1):
 
     import pygame as pg
     import numpy as np
@@ -464,9 +463,9 @@ def replot(colorv):
             for j in range(1,3):
                 for i in range (0, 2):
 
-                    color1 = int(colorv[id][0])
-                    color2 = int(colorv[id][1])
-                    color3 = int(colorv[id][2])
+                    color1 = int(colorv1[id][0])
+                    color2 = int(colorv1[id][1])
+                    color3 = int(colorv1[id][2])
 
                     rect_im = pg.draw.rect(screen, pg.Color(color1, color2, color3), (i*1.25*L + 2*L + k*2.875*L, 2*j*L + floor*7*L, L, 2*L), 0)
                     rect = pg.Rect(i*1.25*L + 2*L + k*2.875*L, j*L, L, 2*L)
@@ -475,15 +474,15 @@ def replot(colorv):
                     temp = np.array([id , pos , np.array([color1, color2, color3]).tolist()]).tolist()
                     np.array(officeid.append(temp))
                     colorid = np.array([color1, color2, color3])
-                    colorv.append(colorid)
+                    colorv1.append(colorid)
                     id = id + 1
 
 
         for i in range(0,4):
 
-            color1 = int(colorv[id][0])
-            color2 = int(colorv[id][1])
-            color3 = int(colorv[id][2])
+            color1 = int(colorv1[id][0])
+            color2 = int(colorv1[id][1])
+            color3 = int(colorv1[id][2])
 
 
             pg.draw.rect(screen, pg.Color(color1, color2, color3), (2*i*L + 2*L, 0.7*L + 7*floor*L, 2*L, L), 0)
@@ -493,7 +492,7 @@ def replot(colorv):
             temp = np.array([id , pos , np.array([color1, color2, color3]).tolist()]).tolist()
             np.array(officeid.append(temp))
             colorid = np.array([color1, color2, color3])
-            colorv.append(colorid)
+            colorv1.append(colorid)
             id = id + 1
 
         pg.draw.lines(screen, black, False, [(2*L, 0.7*L + 7*floor*L), (9.98*L, 0.7*L + 7*floor*L)], 2)
@@ -514,15 +513,10 @@ def replot(colorv):
     for id in range(27,48):
         legend = pg.draw.rect(screen, pg.Color(int(colorv[id][0]), int(colorv[id][1]), int(colorv[id][2])), (640, 97 + (id-27)*20, 10, 10), 0)
 
-    text1 = font.render('Patelli', True, black, white)
-    textRect = text1.get_rect()
-    textRect.center = (600, 340)
-    screen.blit(text1, textRect)
-
     pg.display.flip()
     running = True
     while running:
       for event in pg.event.get():
         if event.type == pg.QUIT:
           running = False
-          return(colorv, officeid);
+          return(colorv1, officeid);
