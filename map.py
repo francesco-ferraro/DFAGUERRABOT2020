@@ -283,6 +283,10 @@ def initialplot():
     for id in range(27,48):
         legend = pg.draw.rect(screen, pg.Color(int(colorv[id][0]), int(colorv[id][1]), int(colorv[id][2])), (640, 97 + (id-27)*20, 10, 10), 0)
 
+    copyid = officeid.copy()
+    for row in copyid:
+        del row[0]
+
     #To get the id of an office
     #print(officeid)
 
@@ -292,7 +296,7 @@ def initialplot():
       for event in pg.event.get():
         if event.type == pg.QUIT:
           running = False
-          return(colorv, officeid);
+          return(colorv, officeid, copyid);
 
 def updatecolor(idsconfitto, idvincitore, colorv):
         colorv1 = list(colorv)
