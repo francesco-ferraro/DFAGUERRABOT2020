@@ -14,7 +14,7 @@ import secrets
 # 10 - schermata attuale + screen
 # 11 - testing
 
-mode = 3
+mode = 9
 
 GAME_NUMBER = 5000
 
