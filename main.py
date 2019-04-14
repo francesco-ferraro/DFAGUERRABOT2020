@@ -245,7 +245,14 @@ elif mode == 2 or mode == 3:
         players[loser].remove(target_location)
         players[winner].append(target_location)
         
-        print(NAMES[winner] + " ha occupato l'ufficio di " + NAMES[loser]+ ".")
+        print(NAMES[winner] + " ha occupato l'ufficio di " + \
+              NAMES[target_location], end='')
+        
+        if target_location != loser:
+            print(" precedentemente occupato da " + NAMES[loser])
+        else:
+            print(".")
+              
         if players[loser] == []:
             print(NAMES[loser] + " è stato completamente sconfitto")
         
@@ -255,8 +262,8 @@ elif mode == 2 or mode == 3:
         if mode == 2:
             map.replot(legend, new_colors, 0)
         elif mode == 3:
-            map.replot(legend, new_colors, 1)
             write_players(players, "saved_state.txt")
+            map.replot(legend, new_colors, 1)
     else:
         print(winner)
 
