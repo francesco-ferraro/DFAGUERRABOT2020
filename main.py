@@ -4,7 +4,7 @@ import secrets
 # Modalità:
 # 0 - fa una partita completa da capo, senza grafica
 # 1 - fa una partita completa dallo stato salvato, senza grafica
-# 2 - legge il file salvato, fa una mossa, mostra la mappa, salva alternativo
+# 2 - legge il file salvato, fa una mossa, salva file alternativo
 # 3 - legge il file salvato, fa una mossa, mostra la mappa, salva file + screen
 # 4 - istogramma vincitori da capo
 # 5 - istogramma vincitori da stato salvato
@@ -14,7 +14,7 @@ import secrets
 # 10 - schermata attuale + screen
 # 11 - testing
 
-mode = 9
+mode = 10
 
 GAME_NUMBER = 5000
 
@@ -260,7 +260,6 @@ elif mode == 2 or mode == 3:
        
         if mode == 2:
             write_players(players, "temp_state.txt")
-            map.replot(legend, new_colors, 0)
         elif mode == 3:
             write_players(players, "saved_state.txt")
             map.replot(legend, new_colors, 1)
@@ -345,5 +344,6 @@ elif mode == 9 or mode == 10:
     elif mode == 10:
         players = read_players("saved_state.txt")
         
+    legend = generate_legend(players)
     colors = generate_color_list(players)
-    map.replot(colors, colors, 1)  
+    map.replot(legend, colors, 1)  
