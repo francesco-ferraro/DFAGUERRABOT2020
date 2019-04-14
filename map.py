@@ -306,10 +306,17 @@ def updatecolor(idsconfitto, idvincitore, colorv):
 
 def replot(colorv, colorv1, save_image):
 
+    from platform import system
     import pygame as pg
     import numpy as np
     # import pandas as pd
     import random
+
+    # Font, su mac o altrove
+    if system() == 'Darwin': 
+        comicsans = 'comicsansmsttf'
+    else:
+        comicsans = 'comicsansms'
 
     #Colors
     white = (255,255,255)
@@ -326,12 +333,12 @@ def replot(colorv, colorv1, save_image):
     #Title
     pg.init()
     pg.display.set_caption('DFA GUERRA BOT 2020')
-    font = pg.font.SysFont('comicsansmsttf', 32)
+    font = pg.font.SysFont(comicsans, 32)
     text = font.render('DFA GUERRA BOT 2020', True, orchid, acquamarine)
     textRect = text.get_rect()
     textRect.center = (550, 50)
     screen.blit(text, textRect)
-    font = pg.font.SysFont('comicsansmsttf', 13)
+    font = pg.font.SysFont(comicsans, 13)
     text1 = font.render('Pironi-Cesaro', True, black, white)
     textRect = text1.get_rect()
     textRect.center = (385, 100)

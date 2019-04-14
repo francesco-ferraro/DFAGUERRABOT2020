@@ -5,19 +5,69 @@ import secrets
 # 0 - fa una partita completa da capo, senza grafica
 # 1 - fa una partita completa dallo stato salvato, senza grafica
 # 2 - legge il file salvato, fa una mossa, mostra la mappa
-# 3 - legge il file salvato, fa una mossa, mostra la mappa, salva file+screen
-# 4 - genera istogramma delle vittorie da capo
-# 5 - legge il file salvato, genera istogramma delle vittorie
+# 3 - legge il file salvato, fa una mossa, mostra la mappa, salva file + screen
+# 4 - istogramma vincitori da capo
+# 5 - istogramma vincitori da stato salvato
 # 6 - istogramma lunghezza partite da capo
 # 7 - istogramma lunghezza partite da stato salvato
-# 9 - schermata iniziale
-# 10 - schermata attuale
+# 9 - schermata iniziale + screen
+# 10 - schermata attuale + screen
 # 11 - testing
+
 mode = 9
 
 GAME_NUMBER = 5000
 
 Z_DIST = 30
+
+NAMES = [
+    'Pironi-Cesaro', 
+    'Salasnich',
+    'Baiesi',
+    'Trovato',
+    'Agarfa',
+    'Enrico',
+    'Stanco',
+    'Lunardon',
+    'Roberto',
+    'Mistura',
+    'Lacaprara',
+    'Mazzocco',
+    'Sada',
+    'Carnera',
+    'Baldassarri',
+    'Vittadini',
+    'Patelli',
+    'Vittone',
+    'Monti',
+    'Marastoni',
+    'Marchetti',
+    'Matone',
+    'Uomo Civis',
+    'Lechner',
+    'Fassò',
+    'Benettin',
+    'Matarrese',
+    'Carmela',
+    'Zanetti',
+    "Dall'Agata",
+    'Bottaccin',
+    '????',
+    'Mengoni',
+    'Stella',
+    'Orlandini',
+    'Maritan',
+    'Zwirner',
+    'Feruglio',
+    'Fortunato',
+    'Lucchesi',
+    'Borghesani',
+    'Pierno',
+    'Zendri',
+    'Giusto',
+    'Martucci',
+    'Peruzzi',
+    'Bastieri']
 
 LOCATIONS = [
     [[75,  60, 0], [155, 202,  47]],
@@ -70,6 +120,7 @@ LOCATIONS = [
     [[270, 36, 2], [202, 102,  52]]
 ]
 
+print(len(LOCATIONS))
 def owner(players, location):
     '''
     Returns the owner of the given location
@@ -133,7 +184,7 @@ def read_players(file):
     
 def generate_color_list(players):
     '''
-    Returns the color list ready to be fed into show_map
+    Returns the color list ready to be fed into map.replot
     '''
     
     colors = []
@@ -142,7 +193,18 @@ def generate_color_list(players):
         colors.append(LOCATIONS[owner(players,i)][1])
         
     return colors
+    
+def generate_legend(players):
+    legend = generate_color_list(VANILLA_PLAYERS)
+    
+    for i in range(len(players)):
+        if players[i] == []:
+            legend[i] = [255,255,255]
+            
+    return legend 
 
+
+VANILLA_PLAYERS = read_players("vanilla_state.txt")
 
 if mode == 0 or mode==1:
     if mode == 0:
@@ -171,7 +233,6 @@ if mode == 0 or mode==1:
             
 elif mode == 2 or mode == 3:
     players = read_players("saved_state.txt")
-    initial_colors = generate_color_list(players)
     
     random_location = secrets.randbelow(len(LOCATIONS))
     near_locations = nearest(players, random_location)
@@ -185,16 +246,17 @@ elif mode == 2 or mode == 3:
         players[loser].remove(target_location)
         players[winner].append(target_location)
         
-        print(str(winner) + " conquista " + str(loser) + \
-              " in " + str(target_location))
+        print(NAMES[winner] + " ha occupato l'ufficio di " + NAMES[loser]+ ".")
+        if players[loser] == []:
+            print(NAMES[loser] + " è stato completamente sconfitto")
         
+        legend = generate_legend(players)
         new_colors = generate_color_list(players)
-        
-        
+       
         if mode == 2:
-            map.replot(initial_colors, new_colors, 0)
+            map.replot(legend, new_colors, 0)
         elif mode == 3:
-            map.replot(initial_colors, new_colors, 1)
+            map.replot(legend, new_colors, 1)
             write_players(players, "saved_state.txt")
     else:
         print(winner)
@@ -229,6 +291,7 @@ elif mode == 4 or mode == 5:
     import matplotlib.pyplot as plt
     fig, ax = plt.subplots()
     n = ax.bar(range(len(LOCATIONS)), winners, tick_label=range(len(LOCATIONS)))
+    plt.xticks(range(len(LOCATIONS)), NAMES, rotation=90, fontsize=10)
     plt.title("z= " + str(Z_DIST) + " N=" + str(GAME_NUMBER))
     plt.show()
     
