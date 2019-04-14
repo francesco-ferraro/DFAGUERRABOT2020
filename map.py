@@ -22,12 +22,12 @@ def initialplot():
     #Title
     pg.init()
     pg.display.set_caption('DFA GUERRA BOT 2020')
-    font = pg.font.SysFont('comicsansms', 32)
-    text = font.render('DFA war bot 2020', True, orchid, acquamarine)
+    font = pg.font.SysFont('comicsansmsttf', 32)
+    text = font.render('DFA GUERRA BOT 2020', True, orchid, acquamarine)
     textRect = text.get_rect()
     textRect.center = (550, 50)
     screen.blit(text, textRect)
-    font = pg.font.SysFont('comicsansms', 14)
+    font = pg.font.SysFont('comicsansmsttf', 14)
     text1 = font.render('Pironi/Cesaro', True, black, white)
     textRect = text1.get_rect()
     textRect.center = (385, 100)
@@ -144,7 +144,7 @@ def initialplot():
     textRect = text1.get_rect()
     textRect.center = (600, 140)
     screen.blit(text1, textRect)
-    text1 = font.render('Turolla', True, black, white)
+    text1 = font.render("Dall'Agata", True, black, white)
     textRect = text1.get_rect()
     textRect.center = (600, 160)
     screen.blit(text1, textRect)
@@ -291,6 +291,7 @@ def initialplot():
     #print(officeid)
 
     pg.display.flip()
+    pg.image.save(screen, "initial.png")
     running = True
     while running:
       for event in pg.event.get():
@@ -303,7 +304,7 @@ def updatecolor(idsconfitto, idvincitore, colorv):
         colorv1[idsconfitto] = colorv1[idvincitore].copy()
         return(colorv1);
 
-def replot(colorv, colorv1):
+def replot(colorv, colorv1, save_image):
 
     import pygame as pg
     import numpy as np
@@ -325,13 +326,13 @@ def replot(colorv, colorv1):
     #Title
     pg.init()
     pg.display.set_caption('DFA GUERRA BOT 2020')
-    font = pg.font.SysFont('comicsansms', 32)
-    text = font.render('DFA war bot 2020', True, orchid, acquamarine)
+    font = pg.font.SysFont('comicsansmsttf', 32)
+    text = font.render('DFA GUERRA BOT 2020', True, orchid, acquamarine)
     textRect = text.get_rect()
     textRect.center = (550, 50)
     screen.blit(text, textRect)
-    font = pg.font.SysFont('comicsansms', 14)
-    text1 = font.render('Pironi/Cesaro', True, black, white)
+    font = pg.font.SysFont('comicsansmsttf', 13)
+    text1 = font.render('Pironi-Cesaro', True, black, white)
     textRect = text1.get_rect()
     textRect.center = (385, 100)
     screen.blit(text1, textRect)
@@ -363,9 +364,9 @@ def replot(colorv, colorv1):
     textRect = text1.get_rect()
     textRect.center = (400, 240)
     screen.blit(text1, textRect)
-    text1 = font.render('Roberto il tecnico', True, black, white)
+    text1 = font.render('Roberto', True, black, white)
     textRect = text1.get_rect()
-    textRect.center = (370, 260)
+    textRect.center = (400, 260)
     screen.blit(text1, textRect)
     text1 = font.render('Mistura', True, black, white)
     textRect = text1.get_rect()
@@ -447,7 +448,7 @@ def replot(colorv, colorv1):
     textRect = text1.get_rect()
     textRect.center = (600, 140)
     screen.blit(text1, textRect)
-    text1 = font.render('Turolla', True, black, white)
+    text1 = font.render("Dall'Agata", True, black, white)
     textRect = text1.get_rect()
     textRect.center = (600, 160)
     screen.blit(text1, textRect)
@@ -582,6 +583,7 @@ def replot(colorv, colorv1):
         legend = pg.draw.rect(screen, pg.Color(int(colorv[id][0]), int(colorv[id][1]), int(colorv[id][2])), (640, 97 + (id-27)*20, 10, 10), 0)
 
     pg.display.flip()
+    if save_image: pg.image.save(screen, "screen.png")
     running = True
     while running:
       for event in pg.event.get():
