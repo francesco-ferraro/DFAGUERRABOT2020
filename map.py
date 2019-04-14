@@ -307,9 +307,12 @@ def updatecolor(idsconfitto, idvincitore, colorv):
 def replot(colorv, colorv1, save_image):
 
     from platform import system
-    import pygame as pg
+
+    # Nasconde messaggio di pygame
+    import contextlib
+    with contextlib.redirect_stdout(None):
+        import pygame as pg
     import numpy as np
-    # import pandas as pd
     import random
 
     # Font, su mac o altrove

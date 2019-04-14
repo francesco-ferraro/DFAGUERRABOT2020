@@ -14,7 +14,7 @@ import secrets
 # 10 - schermata attuale + screen
 # 11 - testing
 
-mode = 9
+mode = 3
 
 GAME_NUMBER = 5000
 
@@ -120,7 +120,6 @@ LOCATIONS = [
     [[270, 36, 2], [202, 102,  52]]
 ]
 
-print(len(LOCATIONS))
 def owner(players, location):
     '''
     Returns the owner of the given location
