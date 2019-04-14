@@ -4,7 +4,7 @@ import secrets
 # Modalità:
 # 0 - fa una partita completa da capo, senza grafica
 # 1 - fa una partita completa dallo stato salvato, senza grafica
-# 2 - legge il file salvato, fa una mossa, mostra la mappa
+# 2 - legge il file salvato, fa una mossa, mostra la mappa, salva alternativo
 # 3 - legge il file salvato, fa una mossa, mostra la mappa, salva file + screen
 # 4 - istogramma vincitori da capo
 # 5 - istogramma vincitori da stato salvato
@@ -47,11 +47,12 @@ NAMES = [
     'Lechner',
     'Fassò',
     'Benettin',
+    'Turolla',
     'Matarrese',
     'Carmela',
     'Zanetti',
     "Dall'Agata",
-    'Bottaccin',
+    'Bottacin',
     '????',
     'Mengoni',
     'Stella',
@@ -247,19 +248,18 @@ elif mode == 2 or mode == 3:
         
         print(NAMES[winner] + " ha occupato l'ufficio di " + \
               NAMES[target_location], end='')
-        
         if target_location != loser:
-            print(" precedentemente occupato da " + NAMES[loser])
-        else:
-            print(".")
+            print(" precedentemente occupato da " + NAMES[loser], end='')
+        print(".")
               
         if players[loser] == []:
-            print(NAMES[loser] + " è stato completamente sconfitto")
+            print(NAMES[loser] + " è stato completamente sconfitto.")
         
         legend = generate_legend(players)
         new_colors = generate_color_list(players)
        
         if mode == 2:
+            write_players(players, "temp_state.txt")
             map.replot(legend, new_colors, 0)
         elif mode == 3:
             write_players(players, "saved_state.txt")
