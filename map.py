@@ -598,7 +598,7 @@ def replot(colorv, colorv1, save_image):
     for id in range(0,26):
         legend = pg.draw.rect(screen, pg.Color(int(colorv[id][0]), int(colorv[id][1]), int(colorv[id][2])), (440, 97 + id*20, 10, 10), 0)
     for id in range(26,48):
-        legend = pg.draw.rect(screen, pg.Color(int(colorv[id][0]), int(colorv[id][1]), int(colorv[id][2])), (640, 97 + (id-27)*20, 10, 10), 0)
+        legend = pg.draw.rect(screen, pg.Color(int(colorv[id][0]), int(colorv[id][1]), int(colorv[id][2])), (640, 97 + (id-26)*20, 10, 10), 0)
 
     pg.display.flip()
     if save_image: pg.image.save(screen, "screen.png")
