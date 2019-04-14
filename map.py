@@ -23,7 +23,7 @@ def initialplot():
     pg.init()
     pg.display.set_caption('DFA GUERRA BOT 2020')
     font = pg.font.SysFont('comicsansms', 32)
-    text = font.render('DFA war bot 2020', True, orchid, acquamarine)
+    text = font.render('DFA GUERRA BOT 2020', True, orchid, acquamarine)
     textRect = text.get_rect()
     textRect.center = (550, 50)
     screen.blit(text, textRect)
@@ -303,7 +303,7 @@ def updatecolor(idsconfitto, idvincitore, colorv):
         colorv1[idsconfitto] = colorv1[idvincitore].copy()
         return(colorv1);
 
-def replot(colorv, colorv1):
+def replot(colorv, colorv1, save_screen):
 
     import pygame as pg
     import numpy as np
@@ -326,7 +326,7 @@ def replot(colorv, colorv1):
     pg.init()
     pg.display.set_caption('DFA GUERRA BOT 2020')
     font = pg.font.SysFont('comicsansms', 32)
-    text = font.render('DFA war bot 2020', True, orchid, acquamarine)
+    text = font.render('DFA GUERRA BOT 2020', True, orchid, acquamarine)
     textRect = text.get_rect()
     textRect.center = (550, 50)
     screen.blit(text, textRect)
@@ -583,6 +583,9 @@ def replot(colorv, colorv1):
 
     pg.display.flip()
     running = True
+    
+    if save_screen: 
+        pg.image.save(screen, "screen.png")
     while running:
       for event in pg.event.get():
         if event.type == pg.QUIT:
