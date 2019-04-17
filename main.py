@@ -1,11 +1,17 @@
+from datetime import date, timedelta
+from os import listdir
+
 import map
 import secrets
+import locale
+
+locale.setlocale(locale.LC_TIME, 'it_IT')
 
 # Modalità:
-# 0 - fa una partita completa da capo, senza grafica
-# 1 - fa una partita completa dallo stato salvato, senza grafica
-# 2 - legge il file salvato, fa una mossa, salva file alternativo
-# 3 - legge il file salvato, fa una mossa, mostra la mappa, salva file + screen
+# 0 - da capo, partita completa senza grafica
+# 1 - legge ultimo stato, partita completa senza grafica
+# 2 - legge ultimo stato, fa una mossa, salva testo
+# 3 - legge ultimo stato, fa una mossa, salva testo e mappa
 # 4 - istogramma vincitori da capo
 # 5 - istogramma vincitori da stato salvato
 # 6 - istogramma lunghezza partite da capo
@@ -14,11 +20,12 @@ import secrets
 # 10 - schermata attuale + screen
 # 11 - testing
 
-mode = 5
+mode = 3
 
 GAME_NUMBER = 5000
 
-Z_DIST = 30
+# originale: z=30
+Z_DIST = 100
 
 NAMES = [
     'Pironi-Cesaro', 
@@ -158,6 +165,10 @@ def nearest(players, location):
             
     return nearest
 
+def write(string, file):
+    with open(file, "w") as f:
+        f.write(string)
+
 def write_players(players, file):
     '''
     Writes 'state' in a file, overwriting
@@ -203,6 +214,21 @@ def generate_legend(players):
             
     return legend 
 
+def last_day():
+    filenames = listdir("./partita")
+    filenames.remove('.DS_Store')
+    dates = [date.fromisoformat(f.split('.')[0]) for f in filenames]
+    dates.sort()
+    return dates[-1].isoformat()
+    
+def next_day():
+    filenames = listdir("./partita")
+    filenames.remove('.DS_Store')
+    dates = [date.fromisoformat(f.split('.')[0]) for f in filenames]
+    dates.sort()
+    next_day = dates[-1] + timedelta(days=1)
+    return next_day.isoformat()
+
 
 VANILLA_PLAYERS = read_players("vanilla_state.txt")
 
@@ -210,7 +236,7 @@ if mode == 0 or mode==1:
     if mode == 0:
         players = read_players("vanilla_state.txt")
     elif mode == 1:    
-        players = read_players("saved_state.txt")
+        players = read_players("./partita/" + last_day() + ".txt")
     
     while True:
         random_location = secrets.randbelow(len(LOCATIONS))
@@ -228,11 +254,11 @@ if mode == 0 or mode==1:
             print(str(winner) + " conquista " + str(loser) + \
                   " in " + str(target_location))
         else:
-            print(winner)
+            print(NAMES[winner])
             break
             
 elif mode == 2 or mode == 3:
-    players = read_players("saved_state.txt")
+    players = read_players("./partita/" + last_day() + ".txt")
     
     random_location = secrets.randbelow(len(LOCATIONS))
     near_locations = nearest(players, random_location)
@@ -246,23 +272,31 @@ elif mode == 2 or mode == 3:
         players[loser].remove(target_location)
         players[winner].append(target_location)
         
-        print(NAMES[winner] + " ha occupato l'ufficio di " + \
-              NAMES[target_location], end='')
+        written_date = date.fromisoformat(next_day())
+        day = written_date.strftime("%d").lstrip("0")
+        month = written_date.strftime("%B").lower()
+        year = written_date.strftime("%Y")
+        
+        message = day + " " + month + " " + year + ":\n"
+        message += NAMES[winner] + " ha occupato l'ufficio di " + \
+                   NAMES[target_location]
         if target_location != loser:
-            print(" precedentemente occupato da " + NAMES[loser], end='')
-        print(".")
+            message += " precedentemente occupato da " + NAMES[loser]
+        message += ".\n"
               
         if players[loser] == []:
-            print(NAMES[loser] + " è stato completamente sconfitto.")
+            message += NAMES[loser] + " è stato completamente sconfitto."
+
+        print(message)
         
         legend = generate_legend(players)
         new_colors = generate_color_list(players)
        
-        if mode == 2:
-            write_players(players, "temp_state.txt")
-        elif mode == 3:
-            write_players(players, "saved_state.txt")
-            map.replot(legend, new_colors, 1)
+        filename = next_day()
+        write_players(players, "./partita/" + filename + ".txt")
+        write(message, "./partita/" + filename + ".msg")
+        if mode == 3:
+            map.replot(legend, new_colors, "./partita/" + filename + ".png")
     else:
         print(winner)
 
@@ -343,8 +377,8 @@ elif mode == 9 or mode == 10:
     if mode == 9:
         players = read_players("vanilla_state.txt")
     elif mode == 10:
-        players = read_players("saved_state.txt")
+        players = read_players("./partita/" + last_day() + ".txt")
         
     legend = generate_legend(players)
     colors = generate_color_list(players)
-    map.replot(legend, colors, 1)  
+    map.replot(legend, colors, 0)  

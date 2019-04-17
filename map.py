@@ -308,7 +308,7 @@ def updatecolor(idsconfitto, idvincitore, colorv):
         colorv1[idsconfitto] = colorv1[idvincitore].copy()
         return(colorv1);
 
-def replot(colorv, colorv1, save_image):
+def replot(colorv, colorv1, image=0):
 
     from platform import system
 
@@ -601,7 +601,7 @@ def replot(colorv, colorv1, save_image):
         legend = pg.draw.rect(screen, pg.Color(int(colorv[id][0]), int(colorv[id][1]), int(colorv[id][2])), (640, 97 + (id-26)*20, 10, 10), 0)
 
     pg.display.flip()
-    if save_image: pg.image.save(screen, "screen.png")
+    if image: pg.image.save(screen, image)
     running = True
     while running:
       for event in pg.event.get():
