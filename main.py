@@ -308,7 +308,7 @@ elif mode == 4 or mode == 5:
         if mode == 4:
             players = read_players("vanilla_state.txt")
         elif mode == 5:
-            players = read_players("saved_state.txt")
+            players = read_players("./partita/" + last_day() + ".txt")
         
         while True:
             random_location = secrets.randbelow(len(LOCATIONS))
@@ -381,4 +381,16 @@ elif mode == 9 or mode == 10:
         
     legend = generate_legend(players)
     colors = generate_color_list(players)
-    map.replot(legend, colors, 0)  
+    map.replot(legend, colors, "screen.png")  
+    
+elif mode == 11:
+    players = read_players("./partita/" + last_day() + ".txt")
+    # Monti: 18
+    # Marastoni: 19
+    # Patelli: 16
+    
+    print(LOCATIONS[18])
+    print(LOCATIONS[19])
+    print(LOCATIONS[16])
+    print(squared_distance(LOCATIONS[18], LOCATIONS[19]))
+    print(squared_distance(LOCATIONS[18], LOCATIONS[16]))
