@@ -20,7 +20,9 @@ locale.setlocale(locale.LC_TIME, 'it_IT')
 # 10 - schermata attuale + screen
 # 11 - testing
 
+# TODO SISTEMARE DISTANZA
 mode = 3
+chosen_player = ''
 
 GAME_NUMBER = 5000
 
@@ -60,7 +62,7 @@ NAMES = [
     'Zanetti',
     "Dall'Agata",
     'Bottacin',
-    '????',
+    'WARMANDO',
     'Mengoni',
     'Stella',
     'Orlandini',
@@ -260,7 +262,11 @@ if mode == 0 or mode==1:
 elif mode == 2 or mode == 3:
     players = read_players("./partita/" + last_day() + ".txt")
     
-    random_location = secrets.randbelow(len(LOCATIONS))
+    if chosen_player:
+        random_location = NAMES.index(chosen_player)
+    else:
+        random_location = secrets.randbelow(len(LOCATIONS))
+        
     near_locations = nearest(players, random_location)
     
     if near_locations is not None:
