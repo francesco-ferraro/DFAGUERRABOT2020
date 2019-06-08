@@ -348,7 +348,7 @@ elif mode == 6 or mode == 7:
         if mode == 6:
             players = read_players("vanilla_state.txt")
         elif mode == 7:
-            players = read_players("saved_state.txt")
+            players = read_players("./partita/" + last_day() + ".txt")
         
         game_lenght = 0
         
