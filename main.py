@@ -21,10 +21,10 @@ locale.setlocale(locale.LC_TIME, 'it_IT')
 # 11 - testing
 
 # TODO SISTEMARE DISTANZA
-mode = 3
+mode = 5
 chosen_player = ''
 
-GAME_NUMBER = 5000
+GAME_NUMBER = 100000
 
 # originale: z=30
 Z_DIST = 100
