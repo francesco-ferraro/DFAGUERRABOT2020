@@ -21,8 +21,7 @@ locale.setlocale(locale.LC_TIME, 'it_IT')
 # 11 - testing
 
 # TODO SISTEMARE DISTANZA
-mode = 5
-chosen_player = ''
+mode = 3
 
 GAME_NUMBER = 100000
 
@@ -262,10 +261,7 @@ if mode == 0 or mode==1:
 elif mode == 2 or mode == 3:
     players = read_players("./partita/" + last_day() + ".txt")
     
-    if chosen_player:
-        random_location = NAMES.index(chosen_player)
-    else:
-        random_location = secrets.randbelow(len(LOCATIONS))
+    random_location = secrets.randbelow(len(LOCATIONS))
         
     near_locations = nearest(players, random_location)
     
@@ -308,7 +304,6 @@ elif mode == 2 or mode == 3:
 
 elif mode == 4 or mode == 5:    
     winners = [0] * len(LOCATIONS)
-    # winners = [8309, 4816, 8082, 3543, 1720, 1686, 1098, 1085, 4572, 8263, 3224, 7974, 6655, 1175, 1150, 6936, 3721, 3098, 5816, 3740, 1251, 1237, 1224, 1154, 2669, 3692, 3535, 5560, 5491, 873, 1100, 5438, 8255, 4778, 8214, 3489, 1700, 1733, 1089, 1111, 4436, 8088, 3353, 7891, 6884, 1136, 1143, 6813]
     
     for i in range(GAME_NUMBER):
         if mode == 4:
